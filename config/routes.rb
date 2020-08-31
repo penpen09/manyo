@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   root to: 'tasks#index'
-  resources :mytweets do
+  resources :tasks do
   post :confirm, on: :collection
   end
 end
