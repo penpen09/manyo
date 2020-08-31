@@ -1,24 +1,38 @@
-# README
+README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# データベース
 
-Things you may want to cover:
+モデル名：User
 
-* Ruby version
+| カラム名| データ型|
+|:-------|:-------|
+|name            |string |
+|email           |string |
+|password_digest |string |
 
-* System dependencies
+モデル名：Task
 
-* Configuration
+| カラム名| データ型|
+|:-------|:-------|
+|title     |string   |
+|content   |text     |
+|limit_date|datetime |
+|status    |integer  |
+|priority  |integer  |
+|user_id   |bigint  |
 
-* Database creation
 
-* Database initialization
+モデル名：Label
 
-* How to run the test suite
+| カラム名| データ型|
+|:-------|:-------|
+|name    |string  |
+|name    |string  |
+|task_id |bigint  |
 
-* Services (job queues, cache servers, search engines, etc.)
+モデル名：TaksLabel
 
-* Deployment instructions
-
-* ...
+| カラム名| データ型|
+|:-------|:-------|
+|task_id |bigint  |
+|label_id|bigint  |
