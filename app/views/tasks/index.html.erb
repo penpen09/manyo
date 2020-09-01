@@ -16,9 +16,9 @@
       <tr>
         <td><%= task.title %></td>
         <td><%= task.content %></td>
-        <td><%= link_to 'Show', task %></td>
-        <td><%= link_to 'Edit', edit_task_path(task) %></td>
-        <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to t('view.tasks.index.Show'), task %></td>
+        <td><%= link_to t('view.tasks.index.Edit'), edit_task_path(task) %></td>
+        <td><%= link_to t('view.tasks.index.Destroy'), task, method: :delete, data: { confirm: t('view.tasks.index.Are you sure?') } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -26,4 +26,4 @@
 
 <br>
 
-<%= link_to 'New Task', new_task_path %>
+<%= link_to t('view.tasks.index.New Task'), new_task_path %>
