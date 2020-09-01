@@ -1,0 +1,9 @@
+<h3>確認</h3>
+<%= form_with(model: @task, local: true) do |form| %>
+  <%= form.hidden_field :title %>
+  <%= form.hidden_field :content %>
+  <p><%= @task.title %></p>
+  <p><%= @task.content %></p>
+  <%= form.submit "登録" %>
+  <%= form.submit "もどる" ,name: 'back' %>
+<% end %>
