@@ -1,6 +1,6 @@
 README
 
-# データベース
+## データベース
 
 モデル名：User
 
@@ -36,3 +36,33 @@ README
 |:-------|:-------|
 |task_id |bigint  |
 |label_id|bigint  |
+
+
+## Herokuへのデプロイ手順
+
+1. Herokuにログイン<br>
+`$ heroku login`
+
+2. アセットプリコンパイルを行う<br>
+`$ rails assets:precompile RAILS_ENV=production`
+
+3. コミットする<br>
+```
+$ git add -A
+$ git commit -m "コミットメッセージ"
+```
+
+4. herokuに新しいアプリケーションを作成<br>
+`$ heroku create`<br>
+（`$ heroku config`でアドレスを確認）
+
+5. 必要であれば Heroku buildpackを追加<br>
+```
+$ heroku buildpacks:set heroku/ruby
+$ heroku buildpacks:add --index 1 heroku/nodejs
+```
+6. Herokuにデプロイ<br>
+`$ git push heroku master`
+
+7. マイグレーションを行う<br>
+`$ heroku run rails db:migrate`
