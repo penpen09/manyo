@@ -21,6 +21,16 @@
     <%= form.text_area :content %>
   </div>
 
+  <div class="field">
+    <%= form.label :limit_date %>
+    <%= form.datetime_select :limit_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :status %>
+    <%= form.select :status,["未着手","着手","完了"] %>
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>

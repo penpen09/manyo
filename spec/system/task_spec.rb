@@ -3,7 +3,6 @@ RSpec.describe 'タスク管理機能', type: :system do
   # let!(:task) { FactoryBot.create(:task, title: 'task') }
   before do
     FactoryBot.create(:task)
-    FactoryBot.create(:second_task)
     visit tasks_path
   end
   describe '新規作成機能' do
@@ -14,6 +13,7 @@ RSpec.describe 'タスク管理機能', type: :system do
         fill_in "task_content", with: 'content'
         click_button "登録"
         expect(page).to have_content 'task'
+        expect(page).to have_content '2020'
       end
     end
   end
@@ -28,7 +28,7 @@ RSpec.describe 'タスク管理機能', type: :system do
     context 'タスクが作成日時の降順に並んでいる場合' do
       it '新しいタスクが一番上に表示される' do
         task_list = all('.task_row')
-        expect(task_list[1]).to have_content 'Factoryで'
+        expect(task_list[1]).to have_content 'test_content'
       end
     end
   end
