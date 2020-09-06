@@ -34,8 +34,8 @@
         <td class="task_row"><%= task.title %></td>
         <td class="task_row"><%= task.content %></td>
         <td class="task_row"><%= task.limit_date.strftime('%Y/%m/%d') %></td>
-        <td><%= task.status %></td>
-        <td><%= task.priority %></td>
+        <td class="task_row"><%= task.status %></td>
+        <td class="task_row"><%= task.priority %></td>
         <td class="task_row"><%= task.created_at.strftime('%Y/%m/%d') %></td>
         <td class="task_row"><%= link_to t('view.tasks.index.Show'), task %></td>
         <td class="task_row"><%= link_to t('view.tasks.index.Edit'), edit_task_path(task) %></td>

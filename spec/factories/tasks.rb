@@ -6,6 +6,8 @@ FactoryBot.define do
     title { 'test_title' }
     content { 'test_content' }
     limit_date { '2020-09-02 12:00:00'}
+    status { '完了' }
+    priority { '高' }
   end
   # 作成するテストデータの名前を「second_task」とします
   # （存在しないクラス名の名前をつける場合、オプションで「このクラスのテストデータにしてください」と指定します）
