@@ -4,6 +4,9 @@
   <%= form.hidden_field :content %>
   <p><%= @task.title %></p>
   <p><%= @task.content %></p>
+  <p><%= @task.limit_date %></p>
+  <p><%= @task.status %></p>
+  <p><%= @task.priority %></p>
   <%= form.submit "登録" %>
   <%= form.submit "もどる" ,name: 'back' %>
 <% end %>

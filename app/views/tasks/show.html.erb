@@ -12,7 +12,17 @@
 
 <p>
   <strong>Limit_date:</strong>
-  <%= @task.limit_date %>
+  <%= @task.limit_date%>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @task.status %>
+</p>
+
+<p>
+  <strong>Priority:</strong>
+  <%= @task.priority %>
 </p>
 
 <%= link_to 'Edit', edit_task_path(@task) %> |
