@@ -52,9 +52,9 @@ RSpec.describe 'タスク管理機能', type: :system do
       it 'タスクが優先順位の降順に並んでいること' do
         visit tasks_path
         click_on '優先順位'
-        task_list_p = all('.task_row_priority')
-        expect(task_list_p[0]).to have_content '高'
-        expect(task_list_p[2]).to have_content '低'
+        task_list_priority = all('.task_row_priority')
+        expect(task_list_priority[0]).to have_content '高'
+        expect(task_list_priority[2]).to have_content '低'
       end
     end
   end
