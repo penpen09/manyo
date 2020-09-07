@@ -1,16 +1,18 @@
 
 <div class="container-fluid">
-  <h1>Tasks</h1>
-  <p id="notice"><%= notice %></p>
-
+  <p class="notice"><%= notice %></p>
+  <div class="row">
+    <div class="col align-self-start"><h3>Tasks</h3></div>
+    <br>
+  </div>
   <div class="row justify-content-around">
-    <%= form_with(url: tasks_path, method: :get, local: true) do |f| %>
-      <%= f.text_field :title ,placeholder: "検索", value: params[:title] , class: "form-group form-control" %>
-      <%= f.select :status, ['未着手', '着手', '完了'], {include_blank: "Status" },{ class: 'form-control drop'} %>
-      <%= f.select :priority, ["高","中","低"], {include_blank: "Priority" }, { class: 'form-control drop'} %>
-      <%= f.hidden_field :search, value:"true" %>
-      <%= f.submit "Search", class: "btn btn-outline-secondary" %>
-    <% end %>
+      <%= form_with(url: tasks_path, method: :get, local: true) do |f| %>
+        <%= f.text_field :title ,placeholder: "検索", value: params[:title] , class: "form-group form-control" %>
+        <%= f.select :status, ['未着手', '着手', '完了'], {include_blank: "Status" },{ class: 'form-control drop'} %>
+        <%= f.select :priority, ["高","中","低"], {include_blank: "Priority" }, { class: 'form-control drop'} %>
+        <%= f.hidden_field :search, value:"true" %>
+        <%= f.submit "Search", class: "btn btn-outline-secondary" %>
+      <% end %>
   </div>
 
 
@@ -23,28 +25,10 @@
         <tr>
           <th>Title</th>
           <th>Content</th>
-          <th>
-            <div class="dropdown">
-              <button type="button" id="dropdown1" class="btn btn-secondary dropdown-toggle btn-outline-primary" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                日付
-              </button>
-              <div class="dropdown-menu" aria-labelledby="dropdown1">
-                <p class="select-drop"><%= link_to "終了期限", tasks_path(sort_expired: "true") %></p>
-                <p class="select-drop"><%= link_to "戻す", tasks_path(Task.all.order(created_at: :desc)) %></p>
-              </div>
-            </div>
-          </th>
+          <th><p class="select-drop"><%= link_to "終了期限", tasks_path(sort_expired: "true") %></p></th>
           <th>Status</th>
-          <th>
-            <div class="dropdown">
-              <button type="button" id="dropdown1" class="btn btn-secondary dropdown-toggle btn-outline-primary" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                重要度
-              </button>
-              <div class="dropdown-menu" aria-labelledby="dropdown1">
-                <p class="select-drop"><%= link_to "優先順位", tasks_path(sort_priority: "true") %></p>
-                <p class="select-drop"><%= link_to "戻す", tasks_path(Task.all.order(created_at: :desc)) %></p>
-          </th>
-          <th>created_at</th>
+          <th><p class="select-drop"><%= link_to "優先順位", tasks_path(sort_priority: "true") %></p></th>
+          <th>created</th>
           <th colspan="3"></th>
         </tr>
       </thead>

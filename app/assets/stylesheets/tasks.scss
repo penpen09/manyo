@@ -7,6 +7,15 @@
 table tr {
   text-align: center;
 }
+h3 {
+  color: #ffb6c1;
+}
+.notice {
+  color: #ffb6c1;
+}
+.table-responsive{
+  margin-top: 20px;
+}
 .select-drop {
   margin-bottom: 0;
 }
@@ -20,4 +29,7 @@ table tr {
 }
 .pagination {
   justify-content: center;
+}
+.container-fluid {
+  margin-top: 100px;
 }
