@@ -17,15 +17,13 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="#download">仮</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="#features">仮２</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="#contact">仮３</a>
-            </li>
+            <% if logged_in? %>
+              <li class="nav-item"><%= link_to "ログアウト", session_path(current_user.id), method: :delete %></li>
+              <li class="nav-item"><%= link_to "プロフィール", user_path(current_user.id) %></li>
+            <% else %>
+              <li class="nav-item"><%= link_to "新規登録", new_user_path %></li>
+              <li class="nav-item"><%= link_to "ログイン", new_session_path %></li>
+            <% end %>
           </ul>
         </div>
       </div>
