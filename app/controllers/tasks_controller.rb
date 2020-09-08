@@ -2,22 +2,22 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
   def index
     if params[:sort_expired]
-      @tasks = Task.all.order(limit_date: :asc).page(params[:page]).per(10)
+      @tasks = current_user.tasks.order(limit_date: :asc).page(params[:page]).per(10)
     elsif params[:sort_priority]
-      @tasks = Task.all.order(priority: :asc).page(params[:page]).per(10)
+      @tasks = current_user.tasks.order(priority: :asc).page(params[:page]).per(10)
     else
-      @tasks = Task.all.order(created_at: :desc).page(params[:page]).per(10)
+      @tasks = current_user.tasks.order(created_at: :desc).page(params[:page]).per(10)
     end
 
     if params[:search].present?
       if params[:title].present? && params[:status].present?
-        @tasks = Task.title_search(params[:title]).status_search(params[:status]).page(params[:page]).per(10)
+        @tasks = current_user.tasks.title_search(params[:title]).status_search(params[:status]).page(params[:page]).per(10)
       elsif params[:title].present?
-        @tasks = Task.title_search(params[:title]).page(params[:page]).per(10)
+        @tasks = current_user.tasks.title_search(params[:title]).page(params[:page]).per(10)
       elsif params[:status].present?
-        @tasks = Task.status_search(params[:status]).page(params[:page]).per(10)
+        @tasks = current_user.tasks.status_search(params[:status]).page(params[:page]).per(10)
       else
-        @tasks = Task.all.order(created_at: :desc)
+        @tasks = current_user.tasks.order(created_at: :desc)
       end
     end
 
@@ -30,7 +30,7 @@ class TasksController < ApplicationController
     @task = Task.new
   end
   def create
-    @task = Task.new(task_params)
+    @task = current_user.tasks.build(task_params)
     if params[:back]
       render :new
     else
@@ -58,7 +58,7 @@ class TasksController < ApplicationController
     end
   end
   def confirm
-    @task = Task.new(task_params)
+    @task = current_user.tasks.build(task_params)
     render :new if @task.invalid?
   end
   def destroy

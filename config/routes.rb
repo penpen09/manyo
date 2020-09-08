@@ -4,5 +4,5 @@ Rails.application.routes.draw do
   post :confirm, on: :collection
   end
   resources :users, only: [:new, :create, :show]
-  root to: 'users#top'
+  root to: 'users#new'
 end

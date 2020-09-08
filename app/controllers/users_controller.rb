@@ -41,7 +41,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
   def user_params
-    params.require(:user).permit(:id, :name, :email, :password, :password_confirmation, :profile, :image, :image_cache, :user_name)
+    params.require(:user).permit(:id, :name, :email, :password, :password_confirmation,)
   end
   def check_user
     if current_user.id != @user.id
