@@ -1,8 +1,31 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
   def index
-    @tasks = Task.all.order(created_at: :desc)
+    if params[:sort_expired]
+      @tasks = Task.all.order(limit_date: :asc).page(params[:page]).per(10)
+    elsif params[:sort_priority]
+      @tasks = Task.all.order(priority: :asc).page(params[:page]).per(10)
+    else
+      @tasks = Task.all.order(created_at: :desc).page(params[:page]).per(10)
+    end
+
+    if params[:search].present?
+      if params[:title].present? && params[:status].present?
+        @tasks = Task.title_search(params[:title]).status_search(params[:status]).page(params[:page]).per(10)
+      elsif params[:title].present?
+        @tasks = Task.title_search(params[:title]).page(params[:page]).per(10)
+      elsif params[:status].present?
+        @tasks = Task.status_search(params[:status]).page(params[:page]).per(10)
+      else
+        @tasks = Task.all.order(created_at: :desc)
+      end
+    end
+
+    @tasks = @tasks.page(params[:page]).per(10)
+
   end
+
+
   def new
     @task = Task.new
   end
@@ -45,7 +68,7 @@ class TasksController < ApplicationController
 
   private
   def task_params
-    params.require(:task).permit(:title, :content)
+    params.require(:task).permit(:title, :content,:limit_date, :sort_expired, :status, :priority)
   end
   def set_task
     @task = Task.find(params[:id])
