@@ -40,7 +40,7 @@
             <td class="task_row"><%= task.content %></td>
             <td class="task_row"><%= task.status %></td>
             <td class="task_row_priority"><%= task.priority %></td>
-            <td class="task_row"><%= task.created_at.strftime('%Y/%m/%d') %></td>
+            <td class="task_row"><%= task.created_at %></td>
             <td class="task_row"><%= link_to t('view.tasks.index.Show'), task ,class: "btn btn-outline-primary" %></td>
             <td class="task_row"><%= link_to t('view.tasks.index.Edit'), edit_task_path(task) ,class: "btn btn-outline-warning" %></td>
             <td class="task_row"><%= link_to t('view.tasks.index.Destroy'), task, method: :delete, data: { confirm: t('view.tasks.index.Are you sure?') } ,class: "btn btn-outline-danger" %></td>
