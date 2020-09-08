@@ -38,6 +38,7 @@
           <tr>
             <td class="task_row"><%= task.title %></td>
             <td class="task_row"><%= task.content %></td>
+            <td class="task_row_limit_date"><%= task.limit_date.strftime('%Y/%m/%d') %></td>
             <td class="task_row"><%= task.status %></td>
             <td class="task_row_priority"><%= task.priority %></td>
             <td class="task_row"><%= task.created_at %></td>
