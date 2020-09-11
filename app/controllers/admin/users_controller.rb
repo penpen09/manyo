@@ -3,7 +3,7 @@ class Admin::UsersController < ApplicationController
   before_action :current_user_admin
 
   def index
-    @users = User.select(:id, :name, :email,:admin).includes(:tasks).page(params[:page]).per(10)
+    @users = User.select(:id, :name, :email,:admin).includes(:tasks).order(id: :asc).page(params[:page]).per(10)
   end
   def new
     @user = User.new
@@ -25,7 +25,7 @@ class Admin::UsersController < ApplicationController
       render :edit
     else
       if @user.update(user_params)
-        redirect_to admin_user_path, notice: '編集しました'
+        redirect_to admin_users_path, notice: '編集しました'
       else
         render :edit
       end

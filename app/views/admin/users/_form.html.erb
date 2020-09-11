@@ -1,6 +1,6 @@
 <div class="form-signin">
-  <h1 class="form-signin-heading">新規登録</h1>
-  <%= form_with(model: @user, local: true) do |f| %>
+  <h1 class="form-signin-heading"></h1>
+  <%= form_with(model: [:admin, @user], local: true) do |f| %>
     <% if @user.errors.any? %>
       <div id="error_explanation">
         <h2><%= pluralize(@user.errors.count, "error") %> prohibited this <%= @user.name %> from being saved:</h2>
@@ -21,9 +21,6 @@
     <%= f.password_field :password_confirmation ,class:'form-control',id:'inputPasswordConfirmation',placeholder:'Password_confirmation'%>
     <%= f.label :admin ,class:'sr-only'%>
     <%= f.check_box :admin, {}, 'true', 'false' %>
-    <%= f.submit "Create my account" ,class: 'btn btn-primary btn-block'%>
+    <%= f.submit "Create" ,class: 'btn btn-primary btn-block'%>
   <% end %>
-  <div class="form_login text-center">
-    <h5>アカウントをお持ちですか？<%= link_to "ログイン", new_session_path %></h5>
-  </div>
 </div>
