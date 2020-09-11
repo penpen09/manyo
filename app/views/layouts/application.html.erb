@@ -18,11 +18,14 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <% if logged_in? %>
-              <li class="nav-item"><%= link_to "ログアウト", session_path(current_user.id), method: :delete %></li>
-              <li class="nav-item"><%= link_to "プロフィール", user_path(current_user.id) %></li>
-            <% else %>
-              <li class="nav-item"><%= link_to "新規登録", new_user_path %></li>
-              <li class="nav-item"><%= link_to "ログイン", new_session_path %></li>
+              <% if logged_in? %>
+                <li class="nav-item"><%= link_to "管理画面", admin_users_path %></li>
+              <% end %>
+                <li class="nav-item"><%= link_to "ログアウト", session_path(current_user.id), method: :delete %></li>
+                <li class="nav-item"><%= link_to "プロフィール", user_path(current_user.id) %></li>
+              <% else %>
+                <li class="nav-item"><%= link_to "新規登録", new_user_path %></li>
+                <li class="nav-item"><%= link_to "ログイン", new_session_path %></li>
             <% end %>
           </ul>
         </div>
