@@ -25,7 +25,7 @@
           <tr>
             <td class="user_row"><%= user.id%></td>
             <td class="user_row"><%= user.name %></td>
-            <td class="user_row"><%= user.tasks.count %></td>
+            <td class="user_row"><%= user.tasks.size %></td>
             <td class="user_row"><%= user.email %></td>
             <td class="user_row"><%= user.admin %></td>
             <td ><%= link_to 'show', admin_user_path(user) ,class: "btn btn-outline-primary" %></td>
