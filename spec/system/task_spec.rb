@@ -49,7 +49,6 @@ RSpec.describe 'タスク管理機能', type: :system do
         visit tasks_path
         click_on '終了期限'
         task_list = all('.task_row_limit_date')
-        sleep 0.5
         expect(task_list[0]).to have_content '2020'
         expect(task_list[1]).to have_content '2021'
         expect(task_list[2]).to have_content '2022'
@@ -60,7 +59,6 @@ RSpec.describe 'タスク管理機能', type: :system do
         visit tasks_path
         click_on '優先順位'
         task_list_priority = all('.task_row_priority')
-        sleep 0.5
         expect(task_list_priority[0]).to have_content '高'
         expect(task_list_priority[2]).to have_content '低'
       end
@@ -72,7 +70,7 @@ RSpec.describe 'タスク管理機能', type: :system do
       it "検索キーワードを含むタスクで絞り込まれる" do
         visit tasks_path
         fill_in :title, with: 'タスク'
-        click_button 'Search'
+        click_on 'Search'
         expect(page).to have_content 'タスク'
       end
     end
