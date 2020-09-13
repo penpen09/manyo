@@ -4,8 +4,7 @@ class Admin::UsersController < ApplicationController
   before_action :current_user_admin
 
   def index
-    @users = User.includes(:tasks)
-    @users = User.order(id: :asc).page(params[:page]).per(10)
+    @users = User.all.select(:id, :name, :email, :admin).order(id: :asc).page(params[:page]).per(10)
   end
   def new
     @user = User.new
