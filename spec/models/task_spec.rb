@@ -17,15 +17,17 @@ RSpec.describe Task, type: :model do
       end
       context 'タスクのタイトルと詳細に内容が記載されている場合' do
         it 'バリデーションが通る' do
-          task = Task.new(title: '成功テスト', content: '成功テスト')
+          user = FactoryBot.create(:user)
+          task = Task.new(title: '成功テスト', content: '成功テスト', limit_date: DateTime.now, user_id: user.id)
           expect(task).to be_valid
         end
       end
     end
 
     describe '検索機能' do
-      let!(:task) {FactoryBot.create(:task, title: 'task', content: "rails", status: "完了")}
-      let!(:task2) {FactoryBot.create(:task, title: 'today', content: "javascript", status: "着手")}
+      let!(:user) { FactoryBot.create(:user) }
+      let!(:task) {FactoryBot.create(:task, title: 'task', content: "rails", status: "完了", user: user)}
+      let!(:task2) {FactoryBot.create(:task, title: 'today', content: "javascript", status: "着手", user: user)}
       context 'scopeメソッドでタイトルのあいまい検索をした場合' do
         it "検索キーワードを含むタスクが絞り込まれる" do
           # title_seachはscopeで提示したタイトル検索用メソッドである。メソッド名は任意で構わない。

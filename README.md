@@ -9,6 +9,7 @@ README
 |name            |string |
 |email           |string |
 |password_digest |string |
+|boolean |admin |
 
 モデル名：Task
 

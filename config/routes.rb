@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
-  root to: 'tasks#index'
-  resources :tasks do
-  post :confirm, on: :collection
+  namespace :admin do
+    resources :users
   end
+  resources :sessions, only: [:new, :create, :destroy]
+  resources :tasks do
+    post :confirm, on: :collection
+  end
+  resources :users, only: [:new, :create, :show]
+  root to: 'users#new'
 end

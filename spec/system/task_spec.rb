@@ -1,9 +1,14 @@
 require 'rails_helper'
 RSpec.describe 'タスク管理機能', type: :system do
+  let!(:user) { FactoryBot.create(:user) }
   before do
-    FactoryBot.create(:task)
-    FactoryBot.create(:second_task)
-    FactoryBot.create(:third_task)
+    FactoryBot.create(:task, user: user)
+    FactoryBot.create(:second_task, user: user)
+    FactoryBot.create(:third_task, user: user)
+    visit new_session_path
+    fill_in "Email address", with: 'admin@admin.com'
+    fill_in "Password", with: 'password'
+    click_on 'Log in'
     visit tasks_path
   end
 
@@ -11,8 +16,8 @@ RSpec.describe 'タスク管理機能', type: :system do
     context 'タスクを新規作成した場合' do
       it '作成したタスクが表示される' do
         visit new_task_path
-        fill_in "task_title", with: 'task'
-        fill_in "task_content", with: 'task'
+        fill_in :task_title, with: 'task'
+        fill_in :task_content, with: 'task'
         select '完了', from: :task_status
         select '高', from: :task_priority
         select '2020', from: :task_limit_date_1i
@@ -28,7 +33,7 @@ RSpec.describe 'タスク管理機能', type: :system do
   describe '一覧表示機能' do
     context '一覧画面に遷移した場合' do
       it '作成済みのタスク一覧が表示される' do
-        task = FactoryBot.create(:task, title: 'task', content: 'content')
+        task = FactoryBot.create(:task, title: 'task', content: 'content', user: user)
         visit tasks_path
         expect(page).to have_content 'task'
       end
@@ -41,17 +46,18 @@ RSpec.describe 'タスク管理機能', type: :system do
     end
     context 'タスクを終了期限でソートしたら昇順に並んでいる場合' do
       it '終了期限が近いタスクが一番上に表示される' do
+        visit tasks_path
         click_on '終了期限'
+        visit tasks_path(sort_expired: "true")
         task_list = all('.task_row_limit_date')
         expect(task_list[0]).to have_content '2020'
-        expect(task_list[1]).to have_content '2021'
-        expect(task_list[2]).to have_content '2022'
       end
     end
     context '優先順位でソートした場合' do
       it 'タスクが優先順位の降順に並んでいること' do
         visit tasks_path
         click_on '優先順位'
+        visit tasks_path(sort_priority: "true")
         task_list_priority = all('.task_row_priority')
         expect(task_list_priority[0]).to have_content '高'
         expect(task_list_priority[2]).to have_content '低'
@@ -64,7 +70,7 @@ RSpec.describe 'タスク管理機能', type: :system do
       it "検索キーワードを含むタスクで絞り込まれる" do
         visit tasks_path
         fill_in :title, with: 'タスク'
-        click_button 'Search'
+        click_on 'Search'
         expect(page).to have_content 'タスク'
       end
     end
@@ -91,7 +97,7 @@ RSpec.describe 'タスク管理機能', type: :system do
   describe '詳細表示機能' do
      context '任意のタスク詳細画面に遷移した場合' do
        it '該当タスクの内容が表示される' do
-         task = FactoryBot.create(:task, title: 'task')
+         task = FactoryBot.create(:task, title: 'task', user: user)
          visit task_path(task.id)
          expect(page).to have_content 'task'
        end
