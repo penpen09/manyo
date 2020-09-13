@@ -40,7 +40,7 @@ RSpec.describe 'ユーザ管理機能', type: :system do
         fill_in "Password", with: 'satotakeru0123'
         click_on 'Log in'
         visit user_path(@user.id)
-        expect(page).not_to have_content 'Admin'
+        expect(current_path).to eq tasks_path
       end
       it 'ログアウトができる' do
         visit new_session_path
