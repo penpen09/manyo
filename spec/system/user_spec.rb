@@ -51,7 +51,18 @@ RSpec.describe 'ユーザ管理機能', type: :system do
         expect(current_path).to eq new_session_path
       end
     end
+    context '管理画面に遷移しようとすると' do
+      it 'タスク一覧に遷移する' do
+        visit new_session_path
+        fill_in "Email address", with: 'sato@takeru.com'
+        fill_in "Password", with: 'satotakeru0123'
+        click_on 'Log in'
+        visit admin_users_path
+        expect(current_path).to eq tasks_path
+      end
+    end
   end
+
 
   describe '管理機能' do
     before do
@@ -86,7 +97,7 @@ RSpec.describe 'ユーザ管理機能', type: :system do
         fill_in "Password", with: 'satotakeru0123'
         fill_in "Password_confirmation", with: 'satotakeru0123'
         click_on 'Create'
-        expect(page).to have_content ''
+        expect(page).to have_content 'sato@takeru.com'
       end
       it 'ユーザの削除ができる' do
         visit admin_users_path
