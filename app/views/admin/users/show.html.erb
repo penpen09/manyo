@@ -13,7 +13,7 @@
 <br></br>
 <div class="text-center">
   <% if current_user.id == @user.id %>
-    <%= link_to "編集する", edit_task_path(@user.id) %>
+    <%= link_to "編集する", edit_admin_user_path(@user.id) %>
   <% else %>
   <% end %>
 </div>
