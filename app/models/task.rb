@@ -8,4 +8,6 @@ class Task < ApplicationRecord
   scope :status_search, ->(status){ where(status: status) }
   scope :priority_search, ->(priority){ where(priority: priority) }
   belongs_to :user
+  has_many :labelings, dependent: :destroy
+  has_many :labels, through: :labelings, source: :label
 end
