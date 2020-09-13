@@ -48,16 +48,16 @@ RSpec.describe 'タスク管理機能', type: :system do
       it '終了期限が近いタスクが一番上に表示される' do
         visit tasks_path
         click_on '終了期限'
+        visit tasks_path(sort_expired: "true")
         task_list = all('.task_row_limit_date')
         expect(task_list[0]).to have_content '2020'
-        expect(task_list[1]).to have_content '2021'
-        expect(task_list[2]).to have_content '2022'
       end
     end
     context '優先順位でソートした場合' do
       it 'タスクが優先順位の降順に並んでいること' do
         visit tasks_path
         click_on '優先順位'
+        visit tasks_path(sort_priority: "true")
         task_list_priority = all('.task_row_priority')
         expect(task_list_priority[0]).to have_content '高'
         expect(task_list_priority[2]).to have_content '低'
