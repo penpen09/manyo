@@ -19,7 +19,7 @@
     <%= f.password_field :password,class:'form-control',id:'inputPassword',placeholder:'Password' %>
     <%= f.label :password_confirmation ,class:'sr-only'%>
     <%= f.password_field :password_confirmation ,class:'form-control',id:'inputPasswordConfirmation',placeholder:'Password_confirmation'%>
-    <%= f.label :admin ,class:'sr-only'%>
+    <%= f.label :admin, '管理者権限'%>
     <%= f.check_box :admin, {}, 'true', 'false' %>
     <%= f.submit "Create" ,class: 'btn btn-primary btn-block'%>
   <% end %>
