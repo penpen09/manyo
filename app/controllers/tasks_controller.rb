@@ -24,6 +24,9 @@ class TasksController < ApplicationController
       end
     end
 
+    @tasks = Task.all
+    @tasks = @tasks.joins(:labels).where(labels: { id: params[:label_id] }).page(params[:page]).per(10) if params[:label_id].present?
+
     @tasks = @tasks.page(params[:page]).per(10)
 
   end
@@ -71,7 +74,7 @@ class TasksController < ApplicationController
 
   private
   def task_params
-    params.require(:task).permit(:title, :content,:limit_date, :sort_expired, :status, :priority)
+    params.require(:task).permit(:title, :content,:limit_date, :sort_expired, :status, :priority, { label_ids: [] })
   end
   def set_task
     @task = Task.find(params[:id])

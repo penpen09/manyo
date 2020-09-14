@@ -24,3 +24,17 @@ User.create!(name: "Admin",
              password_confirmation: 'password',
              admin: true
              )
+10.times do |i|
+  Label.create!(name: "sample#{i + 1}")
+end
+
+10.times do |k|
+  Task.create!(
+  title:"task#{k + 1}",
+  content: "content#{k + 1}",
+  limit_date: '2020-09-14 00:00:00',
+  status: '着手',
+  priority: 2,
+  user_id: User.first.id + k
+)
+end
