@@ -53,6 +53,9 @@ class TasksController < ApplicationController
   end
   def update
     @task = Task.find(params[:id])
+    unless params[:task][:label_ids]
+      @task.labelings.delete_all
+    end
     if params[:back]
       render  :edit
     else
